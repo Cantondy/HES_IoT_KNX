@@ -449,8 +449,6 @@ def send_knx_request(
     ### Check if status from connection_state_response is OK, else disconnect
     checkError(conn_state_resp, disc_req)
 
-    dest_addr_group = knxnet.GroupAddress.from_str(args.group_address)
-
     #########################################################
     ### Begin dialog with TUNNELING_REQUEST and TUNNELING_ACK
     #########################################################
@@ -458,7 +456,7 @@ def send_knx_request(
     # -> Tunneling Request
     tunn_req = knxnet.create_frame(
         knxnet.ServiceTypeDescriptor.TUNNELLING_REQUEST,
-        dest_addr_group,
+        dest_group_addr,
         channel_id,
         data,
         data_size,
